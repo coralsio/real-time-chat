@@ -1,0 +1,1 @@
+import {NextRequest} from "next/server";import {redirect} from "next/navigation";import {doLogout} from "@/app/lib/auth";export async function GET(request: NextRequest) {    await doLogout();    redirect('/login')}

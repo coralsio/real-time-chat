@@ -25,12 +25,9 @@ export async function doLogin(user: any) {
         name: user.name,
         last_name: user.last_name,
         email: user.email,
-        confirmed: user.confirmed,
         roles: user.roles,
         permissions: user.permissions,
-        authorization: user.authorization,
-        company: user.company,
-        employee: user.employee,
+        authorization: user.authorization
     }
 
     cookies().set('session' as any, JSON.stringify(dataUserToStore) as any, {
@@ -40,9 +37,7 @@ export async function doLogin(user: any) {
     cookies().set('user' as any, JSON.stringify({
         full_name: user.full_name,
         roles: user.roles,
-        picture_thumb: user.picture_thumb,
-        confirmed: user.confirmed,
-        reaming_jobs_count: user.company?.reaming_jobs_count
+        picture_thumb: user.picture_thumb
     }) as any)
 
     return user;
@@ -52,4 +47,32 @@ export async function getSession(key: string = 'session') {
     const session = cookies().get(key as any)?.value;
     if (!session) return null;
     return JSON.parse(session)
+}
+
+export async function logout() {
+    await axios.post('auth/logout').then((response: AxiosResponse) => {
+    }).catch(err => {
+        console.log(err);
+    })
+}
+
+
+export async function doLogout() {
+    // Destroy the session
+    cookies().delete('session' as any);
+    cookies().delete('user' as any);
+}
+
+
+export async function registerUser(prevState: any, data: object) {
+
+    return await axios.post('/auth/register', data).then(async (response: AxiosResponse) => {
+        return {
+            user: await doLogin(response.data.data),
+            status: response.data.status,
+            message: response.data.message
+        }
+    }).catch(e => {
+        return e.response.data
+    })
 }

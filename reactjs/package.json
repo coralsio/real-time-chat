@@ -9,13 +9,24 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@nextui-org/react": "^2.4.6",
     "axios": "^1.7.3",
+    "clsx": "^2.1.1",
     "crypto-js": "^4.2.0",
+    "emoji-picker-react": "^4.11.1",
+    "laravel-echo": "^1.16.1",
+    "lodash": "^4.17.21",
     "next": "14.2.5",
     "next-client-cookies": "^1.1.1",
+    "pusher-js": "^8.4.0-rc2",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.52.2",
+    "react-hot-toast": "^2.4.1",
+    "react-infinite-scroll-component": "^6.1.0",
+    "sharp": "^0.33.4",
+    "tailwind-merge": "^2.4.0",
+    "use-debounce": "^10.0.2",
     "zustand": "^4.5.4"
   },
   "devDependencies": {
