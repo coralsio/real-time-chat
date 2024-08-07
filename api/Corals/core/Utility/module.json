@@ -1,0 +1,17 @@
+{
+  "code": "corals-utility",
+  "name": "Utility Module",
+  "author": "Corals",
+  "type": "core",
+  "description": "Utility Package",
+  "namespace": "Corals\\Utility\\",
+  "provider": "UtilityServiceProvider",
+  "version": "10.0.1",
+  "load_order": "0",
+  "folder": "Utility",
+  "autoload": "psr-4",
+  "icon": "fa fa-cloud",
+  "require": {
+  }
+}
+

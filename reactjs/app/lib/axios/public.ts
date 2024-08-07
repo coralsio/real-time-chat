@@ -1,0 +1,1 @@
+import Axios from "axios";let headers = {    'Content-Type': 'application/json',};export default Axios.create(<any>{    baseURL: process.env.NEXT_PUBLIC_API_URL,    headers: headers});
