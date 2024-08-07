@@ -40,9 +40,6 @@ export default function LoginForm() {
     });
 
     useEffect(() => {
-
-        console.log('state', state);
-
         if (!state.user && !state.errors) {
             return;
         }
