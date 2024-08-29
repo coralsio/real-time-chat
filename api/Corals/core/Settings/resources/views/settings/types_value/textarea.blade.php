@@ -1,1 +1,0 @@
-{!! CoralsForm::textarea('value','Settings::attributes.setting.value') !!}

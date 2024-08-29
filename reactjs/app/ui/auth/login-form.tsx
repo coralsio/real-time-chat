@@ -1,6 +1,6 @@
 'use client'
 
-import React, {useEffect} from "react";
+import React, {useEffect, useTransition} from "react";
 import {useForm} from 'react-hook-form';
 import {useFormState} from 'react-dom'
 import {login} from "@/app/lib/auth";
@@ -10,6 +10,8 @@ import {setServerValidationErrors} from "@/app/lib/helpers";
 import {Store, useStore} from "@/app/store/zustand";
 import {User} from "@/app/types";
 import ErrorMessages from "@/app/ui/error-msgs";
+import Link from "next/link";
+import {cn} from "../../lib/helpers";
 
 
 interface LoginFormFields {
@@ -51,7 +53,7 @@ export default function LoginForm() {
         }
 
         if (state?.status === 'success') {
-            router.push('/dashboard')
+            router.push('/chat')
         }
 
     }, [state])
@@ -66,21 +68,29 @@ export default function LoginForm() {
         password: register('password', {required: 'Password is required'})
     };
 
-    return <form onSubmit={handleSubmit(formAction)}>
+    const [isPending, startTransition] = useTransition();
+
+
+    return <form onSubmit={(e) => {
+        e.preventDefault();
+        startTransition(() => {
+            handleSubmit(formAction)()
+        })
+    }}>
         <div>
             <label htmlFor="email"
-                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
+                   className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Your
                 email</label>
             <input type="email" id="email"
                    {...fields.email}
                    className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                   placeholder="name@company.com" />
+                   placeholder="name@company.com"/>
         </div>
         <ErrorMessages errors={errors.email?.message}/>
 
-        <div>
+        <div className={'mt-3'}>
             <label htmlFor="password"
-                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                   className="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Password</label>
             <input
                 {...fields.password}
                 type="password" id="password" placeholder="••••••••"
@@ -88,14 +98,18 @@ export default function LoginForm() {
         </div>
         <ErrorMessages errors={errors.password?.message}/>
 
-        <button type="submit"
-                className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+        <button disabled={isPending}
+                type="submit"
+                className={cn("mt-3 w-full text-white bg-primary-600 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800", {
+                    'bg-gray cursor-not-allowed': isPending,
+                    'hover:bg-primary-700 ': !isPending
+                })}>
             Log in
         </button>
         <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-            Don’t have an account yet? <a href="#"
-                                          className="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign
-            up</a>
+            Don’t have an account yet? <Link href="/sign-up"
+                                             className="font-medium text-primary-600 hover:underline dark:text-primary-500">Sign
+            up</Link>
         </p>
     </form>
 }
