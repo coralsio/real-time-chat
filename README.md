@@ -2,6 +2,7 @@
 
 This project is a real-time chat application built with React, Next.js, Reverb, and Laraship. The application leverages Laraship as the backend, Reverb for real-time capabilities, and Next.js as the frontend framework. Media files are stored securely using Amazon S3.
 
+
 ## Table of Contents
 
 - [Features](#features)
@@ -9,6 +10,7 @@ This project is a real-time chat application built with React, Next.js, Reverb, 
 - [Configuration](#configuration)
 - [Usage](#usage)
 - [Contributing](#contributing)
+- [Screenshots](#screenshots)
 - [License](#license)
 
 ## Features
@@ -175,6 +177,14 @@ multiple domains, separate them with commas.
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request or open an Issue to discuss any changes.
+
+##Screenshots
+![Attachments](screenshots/attachements.png)
+![Chat Actions](screenshots/chat-actions.png)
+![is typing ](screenshots/is-typing-detection.png)
+![Online Offline](screenshots/online-offline.png)
+![Emojis](screenshots/support-emojies.png)
+![Unread Count](screenshots/unread-count.png)
 
 ## License
 
