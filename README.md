@@ -1,118 +1,181 @@
-# Laraship Module Setup Guide
+# Real-Time Chat Application
 
-This guide will walk you through the steps to clone and set up the Laraship & Messaging modules.
+This project is a real-time chat application built with React, Next.js, Reverb, and Laraship. The application leverages Laraship as the backend, Reverb for real-time capabilities, and Next.js as the frontend framework. Media files are stored securely using Amazon S3.
 
-## 1. Clone the Laraship Repository
+## Table of Contents
 
-Start by cloning the Laraship repository:
+- [Features](#features)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
 
-```
-git clone https://github.com/coralsio/laraship.git
-```
-Navigate to the project directory and run the following command:
+## Features
 
-```
-composer install
-```
+- **Real-time messaging:** Instant message delivery and receipt across all connected clients.
+- **Multiple attachments:** Send images, documents, videos, and other file types stored securely on S3.
+- **Typing indicators:** See when another user is typing a message.
+- **Emojis:** Integrate emojis into your messages for expressive communication.
+- **Conversation search:** Easily search through conversations to find specific messages.
+- **Delete messages:** Remove unwanted messages from conversations with delete functionality.
+- **User authentication:** Secure user login and registration powered by Laraship.
+- **Scalable architecture:** Designed to scale with your application's growth.
+- **Mobile responsive design:** Fully functional on both desktop and mobile devices.
+- **Easy to extend and customize:** Modular design for adding new features and customizations.
 
-## 2. Set Up Laraship
+## Installation
 
-``copy .env.example .env``
+### Prerequisites
 
-``php arisan key:generate``
+- [Node.js](https://nodejs.org/) (>= 18.x)
+- [Composer](https://getcomposer.org/) (for Laraship)
+- [PHP](https://www.php.net/) (>= 8.2)
+- [Laraship](https://www.laraship.com/) (>= 10.x)
+- [MySQL](https://www.mysql.com/) or another supported database
+- [Amazon S3](https://aws.amazon.com/s3/) for media storage
 
-### Set up your own database connection in .env
+### Backend (Laraship)
 
-```
-DB_CONNECTION=
-DB_HOST=
-DB_PORT=
-DB_DATABASE=
-DB_USERNAME=
-DB_PASSWORD=
-```
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/coralsio/laraship.git
+    cd laraship
+    ```
 
-### Setup your own AWS Keys in .env
+2. Install dependencies:
+    ```bash
+    composer install
+    ```
 
-```
-AWS_KEY=
-AWS_SECRET=
-AWS_REGION=
-AWS_BUCKET=
-```
+3. Set up your environment file:
+    ```bash
+    cp .env.example .env
+    php artisan key:generate
+    ```
 
-### Run laraship deployment command
+4. Configure your database and S3 settings in the `.env` file:
+    ```env
+    DB_CONNECTION=
+    DB_HOST=
+    DB_PORT=
+    DB_DATABASE=
+    DB_USERNAME=
+    DB_PASSWORD=
 
-``php artisan deploy:ls``
+    AWS_KEY=
+    AWS_SECRET=
+    AWS_REGION=
+    AWS_BUCKET=
 
-## 3. Install the Messaging Module
 
-Install the required messaging module via Composer:
+    REVERB_APP_ID=your-reverb-app-id
+    REVERB_APP_KEY=your-reverb-app-key
+    REVERB_HOST=your-reverb-host
+    REVERB_PORT=8080
+    REVERB_SCHEME=http
 
-``composer require corals/messaging``
+    ```
 
-Next, install the Messaging module from the /modules section in the admin panel.
+5. Run migrations:
+    ```bash
+    php artisan migrate
+    ```
 
-``path-to-your-laraship.com/modules``
+6. Install Laraship Messaging Module
+    ```bash
+   composer require corals/messaging
+    ```
+  Next, install the Messaging module from the /modules section in the admin panel.
+  
+6. Install and Start Reverb
+    ```bash
+   php artisan reverb:install
+   php artisan reverb:start 
+    ```
 
-## 4. Install and Start Reverb
 
-Install Reverb using the following command:
+### Frontend (React & Next.js)
 
-``php artisan reverb:install``
+1. clone the frontend repository
+    ```bash
+    git clone https://github.com/coralsio/real-time-chat.git
+    cd real-time-chat
+    ```
 
-Start Reverb with:
+2. Install dependencies:
+    ```bash
+    npm install
+    ```
 
-``php artisan reverb:start``
-
-Finally, run the messaging queue:
-
-``php artisan queue:work --queue=messaging-queue``
-
-## 5. Setup your Frontend
-
-navigate your reactjs directory and run the following
-
-``copy .env.example .env``
-
-## 6. Update fronend .env Keys
-
-To ensure proper configuration, you need to update the .env file with the correct values. Here's how you can map the
-keys from the Laraship .env file to the frontend .env file:
-
-### Laraship .env File
-
-Find and update the following keys in your Laraship .env file:
-
-```
-REVERB_APP_ID=your-reverb-app-id
-REVERB_APP_KEY=your-reverb-app-key
-REVERB_HOST=your-reverb-host
-REVERB_PORT=8080
-REVERB_SCHEME=http
-```
-
-### Frontend .env File
-
-In your frontend .env file, update these keys accordingly:
-
-```
-NEXT_PUBLIC_REVERB_APP_ID=your-reverb-app-id
-NEXT_PUBLIC_REVERB_APP_KEY=your-reverb-app-key
-NEXT_PUBLIC_REVERB_HOST=your-reverb-host    
-NEXT_PUBLIC_REVERB_PORT=8080
-NEXT_PUBLIC_REVERB_SCHEME=http
-```
-
-## 7. Configure NEXT_IMAGE_DOMAINS in .env frontend
-
-Finally, Configure the NEXT_IMAGE_DOMAINS in your frontend .env file to specify the allowed image domains. To include
+3. Update .env file for the following
+   ```
+    NEXT_PUBLIC_REVERB_APP_ID=your-reverb-app-id
+    NEXT_PUBLIC_REVERB_APP_KEY=your-reverb-app-key
+    NEXT_PUBLIC_REVERB_HOST=your-reverb-host    
+    NEXT_PUBLIC_REVERB_PORT=8080
+    NEXT_PUBLIC_REVERB_SCHEME=http
+    NEXT_IMAGE_DOMAINS=your-laraship-domain,your-aws-bucket-dowmin ,  specify the allowed image domains. To include
 multiple domains, separate them with commas.
 
-``your-laraship-domain,your-aws-bucket-dowmin``
+5. Start the Next.js development server:
+    ```bash
+    npm run dev
+    ```
 
-``NEXT_IMAGE_DOMAINS=your-laraship-domain,your-aws-bucket-dowmin``
+## Configuration
 
-###You're now ready to use Laraship with the messaging module integrated!
+### Laraship WebSockets
 
+- Publish the configuration file:
+    ```bash
+    php artisan vendor:publish --provider="BeyondCode\LaravelWebSockets\WebSocketsServiceProvider" --tag="config"
+    ```
 
+- Configure the `websockets` settings in `config/websockets.php`.
+
+- Run the WebSocket server:
+    ```bash
+    php artisan websockets:serve
+    ```
+## Usage
+
+### Running the Application
+
+- **Start the Laraship Backend:**
+    ```bash
+    php artisan serve
+    ```
+
+- **Start the React/Next.js Frontend:**
+    ```bash
+    npm run dev
+    ```
+
+- **Open your browser and navigate to:**
+    ```
+    http://localhost:3000
+    ```
+
+### Sending Messages
+
+- Log in or register a new account.
+- Navigate to the chat page.
+- Start a new conversation or join an existing one.
+- Send a message and see it appear in real-time for all participants.
+
+### Additional Features
+
+- **Multiple Attachments:** Click on the attachment icon to upload and send multiple files like images, documents, and videos. All media files are stored securely on Amazon S3.
+- **Is Typing Functionality:** A "User is typing..." indicator will appear when another user is typing a message in the conversation.
+- **Emojis:** Click on the emoji icon to browse and insert emojis into your messages.
+- **Conversation Search:** Use the search bar within the chat interface to search through your conversation history.
+- **Delete Messages:** Hover over a message and click the delete icon to remove it from the conversation.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request or open an Issue to discuss any changes.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
