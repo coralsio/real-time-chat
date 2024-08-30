@@ -2,6 +2,10 @@
 
 This project is a real-time chat application built with React, Next.js, Reverb, and Laraship. The application leverages Laraship as the backend, Reverb for real-time capabilities, and Next.js as the frontend framework. Media files are stored securely using Amazon S3.
 
+### Elevate Your Projects with Our Expert Laravel Team!
+Are you seeking a dedicated, experienced Laravel development team to bring your web projects to life? Look no further than Corals. Our team of seasoned Laravel developers is here to collaborate with you and deliver top-notch, customized solutions that exceed your expectations.
+
+Ready to take your project to the next level with our expert Laravel team? Reach out to us at info@corals.io or fill out the [form on our website](https://www.laraship.com/contact/) to discuss your project requirements and kickstart a successful collaboration.
 
 ## Table of Contents
 
