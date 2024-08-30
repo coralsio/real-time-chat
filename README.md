@@ -178,7 +178,8 @@ multiple domains, separate them with commas.
 
 Contributions are welcome! Please feel free to submit a Pull Request or open an Issue to discuss any changes.
 
-##Screenshots
+## Screenshots
+
 ![Attachments](screenshots/attachements.png)
 ![Chat Actions](screenshots/chat-actions.png)
 ![is typing ](screenshots/is-typing-detection.png)
