@@ -92,8 +92,9 @@ Ready to take your project to the next level with our expert Laravel team? Reach
     ```bash
    composer require corals/messaging
     ```
-  Next, install the Messaging module from the /modules section in the admin panel.
-  
+  Next, install the Messaging module from the /modules section in the laraship admin panel.
+ 
+ check corals messaging module features https://github.com/coralsio/messaging
 6. Install and Start Reverb
     ```bash
    php artisan reverb:install
