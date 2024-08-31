@@ -11,7 +11,6 @@ Ready to take your project to the next level with our expert Laravel team? Reach
 
 - [Features](#features)
 - [Installation](#installation)
-- [Configuration](#configuration)
 - [Usage](#usage)
 - [Contributing](#contributing)
 - [Screenshots](#screenshots)
@@ -22,6 +21,7 @@ Ready to take your project to the next level with our expert Laravel team? Reach
 - **Real-time messaging:** Instant message delivery and receipt across all connected clients.
 - **Multiple attachments:** Send images, documents, videos, and other file types stored securely on S3.
 - **Typing indicators:** See when another user is typing a message.
+- **Read Messages Indicator:** double <span style="color:green;">&check;&check;</span> when the message read.
 - **Emojis:** Integrate emojis into your messages for expressive communication.
 - **Conversation search:** Easily search through conversations to find specific messages.
 - **Delete messages:** Remove unwanted messages from conversations with delete functionality.
@@ -129,21 +129,6 @@ multiple domains, separate them with commas.
     npm run dev
     ```
 
-## Configuration
-
-### Laraship WebSockets
-
-- Publish the configuration file:
-    ```bash
-    php artisan vendor:publish --provider="BeyondCode\LaravelWebSockets\WebSocketsServiceProvider" --tag="config"
-    ```
-
-- Configure the `websockets` settings in `config/websockets.php`.
-
-- Run the WebSocket server:
-    ```bash
-    php artisan websockets:serve
-    ```
 ## Usage
 
 ### Running the Application
